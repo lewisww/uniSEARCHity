@@ -14,6 +14,10 @@ public class University {
         admissionRate = a;
         majors = m;
     }
+    
+    public makeUniversity() {
+        
+    }
 
     public String getName() {
         return name;
