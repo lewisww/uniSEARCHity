@@ -98,6 +98,18 @@ public class account {
 		}
 		return "0";
 	}
+	public static String isExist(String userName, String password, Scanner input) throws FileNotFoundException {
+		File userFile = new File(userName + ".txt");
+		if (!userFile.exists()) {
+			System.out.println("We do not find your information in the system, please sign up first.");
+			return "0";
+		}
+
+		if (correctPassword(userFile, password, input)) {
+			return userName;
+		}
+		return "0";
+	}
 
 	public static boolean correctPassword(File file, Scanner input) throws FileNotFoundException {
 		Scanner inFile = new Scanner(file);
@@ -108,6 +120,18 @@ public class account {
 		for (int i = 0; i < 3; i++) {
 			String inputPassword = input.nextLine().trim();
 			if (inputPassword.equals(correctPassword)) {
+				return true;
+			}
+			System.out.println("Invalid password, you have " + (2 - i) + " times to try again!");
+		}
+		return false;
+	}
+	public static boolean correctPassword(File file, String password, Scanner input) throws FileNotFoundException {
+		Scanner inFile = new Scanner(file);
+		String correctPassword = inFile.nextLine();
+		inFile.close();
+		for (int i = 0; i < 3; i++) {
+			if (password.equals(correctPassword)) {
 				return true;
 			}
 			System.out.println("Invalid password, you have " + (2 - i) + " times to try again!");

@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.io.File;
 import java.io.FileNotFoundException;
 
 /**
@@ -72,6 +73,12 @@ public class userProgress {
 		System.out.println("Please enter your user name to log in.");
 		String inputName = input.next();
 		return account.isExist(inputName, input);
+	}
+	public static String logIn(String inputName, String password, Scanner input) throws FileNotFoundException {
+		//System.out.println("Please enter your user name to log in.");
+		return account.isExist(inputName, password, input);
+		
+		
 	}
 
 	/**
