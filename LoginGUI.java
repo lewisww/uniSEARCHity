@@ -58,13 +58,15 @@ public class LoginGUI extends JFrame {
 		create = new JButton("Create New User");
 		create.setBackground(Color.darkGray);
 		create.setOpaque(true);
+		create.addActionListener(e -> {
+			CreateAccountGUI.main(null);
+		});
 		lists = new JButton("List Colleges");
 		lists.setBackground(Color.darkGray);
 		lists.setOpaque(true);
-		Scanner input = new Scanner(System.in);
 		login.addActionListener(e -> {
 			try {
-				userLogin(username.getText(),password.getText(), input);
+				userLogin(username.getText(),password.getText());
 			} catch (FileNotFoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -95,9 +97,19 @@ public class LoginGUI extends JFrame {
 		frame.setVisible(true);
 		
 	}
-	public void userLogin(String username, String password, Scanner input) throws FileNotFoundException {
+	/**
+	 * This method takes the information from the GUI Textboxes and uses the to login to through the other files
+	 * If logged in correctly, it will eventually take you to the homescreen
+	 * 
+	 * Charlie Harders
+	 * 
+	 * @param username  Username of the user
+	 * @param password  Password of the user
+	 * @throws FileNotFoundException
+	 */
+	public void userLogin(String username, String password) throws FileNotFoundException {
 		
-		if (username.equals(userProgress.logIn(username, password, input))){
+		if (username.equals(userProgress.logIn(username, password))){
 			System.out.println("success");
 			status.setText("Success");
 			this.add(status);

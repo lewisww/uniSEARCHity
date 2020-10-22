@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -11,7 +12,6 @@ import java.util.Scanner;
  *
  */
 public class account {
-
 	/**
 	 * This is the method for creating a new account. It will check user's entry. If
 	 * entry's name is already taken, it will return false. If entry's name is
@@ -41,6 +41,54 @@ public class account {
 			password = input.next().trim();
 		}
 		output.println(password);
+		output.close();
+		return true;
+	}
+	
+	/**
+	 * This is the method for creating a new account, using the GUI.  It takes the logic of the above class and
+	 * applies it using the GUI text boxes instead of a Scanner. It will check username. If
+	 * username is already taken, it will return false. It will print to a file the name, email, and age.
+	 * Then it will check if the password and confirm password are the same.  If they are,
+	 * password will be passed to the invalidPassword method to check its validity.
+	 * If everything passes, it is written to the file.
+	 * 
+	 * Charlie Harders
+	 * 
+	 * @param A pre-opened scanner value.
+	 * @return It will return true if a new account is successfully created. It will
+	 *         return no if an account is already existed.
+	 * @throws FileNotFoundException
+	 */
+	public static boolean createAccount(String name, String username, String email, String pass, String cpass, int age) throws FileNotFoundException {
+		//creates a new file with the name "username".txt
+		File userFile = new File(username + ".txt");
+		if (userFile.exists()) {
+			System.out.println("The account already exist, please log in or use another name for registration!");
+			return false;
+		}
+		PrintWriter output = new PrintWriter(userFile);
+		/*
+		 * writes name email and age to the 
+		 */
+		
+		output.println(name + "\n" + email + "\n" + age);
+		/*
+		 * checks if the password given and the confirm password text box are the same
+		 * then checks if the password is a valid password
+		 */
+		if(pass.equals(cpass))
+			if(invalidPassword(pass))
+				output.println(pass);
+			else {
+				output.close();
+				return false;
+			}
+		else {
+			output.close();
+			return false;
+		}
+		
 		output.close();
 		return true;
 	}
@@ -98,14 +146,27 @@ public class account {
 		}
 		return "0";
 	}
-	public static String isExist(String userName, String password, Scanner input) throws FileNotFoundException {
+	/**
+	 * This method checks whether the user entered name exist in the system or not.
+	 * Built around the GUI instead of the Scanner
+	 * 
+	 * Charlie Harders
+	 * 
+	 * @param userName The string value which user entered and stored in
+	 *                 userProgress class - logIn method.
+	 * @param password The String sent to the correctPassword method to check
+	 * @return The method returns a string value which includes "0" for not exist or a word which
+	 *         is a existed user name. 
+	 * @throws FileNotFoundException
+	 */
+	public static String isExist(String userName, String password) throws FileNotFoundException {
 		File userFile = new File(userName + ".txt");
 		if (!userFile.exists()) {
 			System.out.println("We do not find your information in the system, please sign up first.");
 			return "0";
 		}
 
-		if (correctPassword(userFile, password, input)) {
+		if (correctPassword(userFile, password)) {
 			return userName;
 		}
 		return "0";
@@ -126,8 +187,24 @@ public class account {
 		}
 		return false;
 	}
-	public static boolean correctPassword(File file, String password, Scanner input) throws FileNotFoundException {
+	/**
+	 * This method checks whether the password matches the password in the file or not
+	 * but it is using the GUI text boxes so it takes in a password string as a parameter
+	 * 
+	 * Charlie Harders
+	 * 
+	 * @param file The file that is going to be searched for the password
+	 * @param  password The String that will be searched for
+	 * @return True if the password matches, False if it does not 
+	 * @throws FileNotFoundException
+	 */
+	public static boolean correctPassword(File file, String password) throws FileNotFoundException {
 		Scanner inFile = new Scanner(file);
+		//This is because, due to the order of where the password is located, you need to go a couple lines down
+		//Will look for a more efficient way to do this
+		inFile.nextLine();
+		inFile.nextLine();
+		inFile.nextLine();
 		String correctPassword = inFile.nextLine();
 		inFile.close();
 		for (int i = 0; i < 3; i++) {

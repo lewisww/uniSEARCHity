@@ -74,9 +74,21 @@ public class userProgress {
 		String inputName = input.next();
 		return account.isExist(inputName, input);
 	}
-	public static String logIn(String inputName, String password, Scanner input) throws FileNotFoundException {
-		//System.out.println("Please enter your user name to log in.");
-		return account.isExist(inputName, password, input);
+	/**
+	 * This is the method for logging in through the GUI instead of the console.
+	 * It is the above method translated to use GUI textboxes instead of the Scanner
+	 * 
+	 * Charlie Harders
+	 * 
+	 * @param inputName The username that you are looking for
+	 * @param password The password you are using
+	 * @return This method return a string value which includes "0" for log in failure or a word which
+	 *         is a existed user name.
+	 * 
+	 * @throws FileNotFoundException
+	 */
+	public static String logIn(String inputName, String password) throws FileNotFoundException {
+		return account.isExist(inputName, password);
 		
 		
 	}

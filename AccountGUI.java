@@ -4,6 +4,7 @@ import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 
 public class AccountGUI extends JFrame {
 	
@@ -19,13 +20,17 @@ public class AccountGUI extends JFrame {
 	JTextField removePreferredSchool;
 	JButton save;
 	JButton display;
+	JPanel cards;
+	JPanel cards2;
+	JPanel im;
+	ImageIcon imag;
 
 	public static void main(String[] args) {
 		
 		JFrame frame = new AccountGUI();
-		frame.setTitle("uniSEARCHity");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
+		//frame.setTitle("uniSEARCHity");
+		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//frame.setVisible(true);
 	}
 	
 	public AccountGUI() {
@@ -34,7 +39,12 @@ public class AccountGUI extends JFrame {
 	}
 	
 	public void createComponents() {
-		this.setLayout(new FlowLayout());
+		cards = new JPanel();
+		
+		
+		cards.setLayout(new GridLayout(7,0));
+		cards.setPreferredSize(new Dimension(500, 200));
+        cards.setMaximumSize(new Dimension(10000, 200));
 		label1 = new JLabel("Username: ");
 		label2 = new JLabel("GPA: ");
 		label3 = new JLabel("Add Preferred School: ");
@@ -44,17 +54,38 @@ public class AccountGUI extends JFrame {
 		addPreferredSchool = new JTextField(25);
 		removePreferredSchool = new JTextField(25);
 		save = new JButton("Save Changes");
+		save.addActionListener(e -> {
+			//try {
+				//createAccount();//(username.getText(),password.getText(), input);
+			/*} /*catch (FileNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}*/
+		});
 		display = new JButton("Display Schools");
 		
-		this.add(label1);
-		this.add(username);
-		this.add(label2);
-		this.add(gpa);
-		this.add(label3);
-		this.add(addPreferredSchool);
-		this.add(label4);
-		this.add(removePreferredSchool);
-		this.add(save);
-		this.add(display);
+		cards.add(label1);
+		cards.add(username);
+		cards.add(label2);
+		cards.add(gpa);
+		cards.add(label3);
+		cards.add(addPreferredSchool);
+		cards.add(label4);
+		cards.add(removePreferredSchool);
+		cards.add(save);
+		cards.add(display);
+		
+		cards.setBackground(Color.WHITE);
+		
+		JFrame frame = new JFrame();
+		frame.setTitle("uniSEARCHity");
+		frame.add(cards,BorderLayout.NORTH);
+		
+		
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
 	}
+	
+	
+	
 }
