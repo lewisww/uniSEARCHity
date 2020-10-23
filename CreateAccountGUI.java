@@ -65,8 +65,9 @@ public class CreateAccountGUI extends JFrame{
 		create = new JButton("Create Account");
 		create.addActionListener(e -> {
 				try {
-					createAccount(name.getText(),username.getText(), email.getText(), passwd.getText(),
-							confpasswd.getText(),Integer.parseInt(age.getText()));
+					if (createAccount(name.getText(),username.getText(), email.getText(), passwd.getText(),
+							confpasswd.getText(),Integer.parseInt(age.getText())))
+						AccountGUI.main(new String[] {username.getText()});
 				} catch (NumberFormatException | FileNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -107,8 +108,8 @@ public class CreateAccountGUI extends JFrame{
 	 * @param age Age to be stored
 	 * @throws FileNotFoundException
 	 */
-	public void createAccount(String name, String user, String email, String pass, String pass2, int age) throws FileNotFoundException {
-		account.createAccount(name, user, email, pass, pass2, age);
+	public boolean createAccount(String name, String user, String email, String pass, String pass2, int age) throws FileNotFoundException {
+		return account.createAccount(name, user, email, pass, pass2, age);
 	}
 	
 	

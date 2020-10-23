@@ -60,6 +60,10 @@ public class account {
 	 *         return no if an account is already existed.
 	 * @throws FileNotFoundException
 	 */
+	/*
+	 * One bug here that I didn't fix: a file is still created if the password is invalid,
+	 * this could mess up future login/account creation attempts.
+	 */
 	public static boolean createAccount(String name, String username, String email, String pass, String cpass, int age) throws FileNotFoundException {
 		//creates a new file with the name "username".txt
 		File userFile = new File(username + ".txt");
@@ -78,7 +82,7 @@ public class account {
 		 * then checks if the password is a valid password
 		 */
 		if(pass.equals(cpass))
-			if(invalidPassword(pass))
+			if(!invalidPassword(pass))
 				output.println(pass);
 			else {
 				output.close();

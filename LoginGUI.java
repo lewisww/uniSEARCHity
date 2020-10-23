@@ -66,7 +66,8 @@ public class LoginGUI extends JFrame {
 		lists.setOpaque(true);
 		login.addActionListener(e -> {
 			try {
-				userLogin(username.getText(),password.getText());
+				if (userLogin(username.getText(),password.getText()))
+					AccountGUI.main(new String[] {username.getText()});
 			} catch (FileNotFoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -107,16 +108,18 @@ public class LoginGUI extends JFrame {
 	 * @param password  Password of the user
 	 * @throws FileNotFoundException
 	 */
-	public void userLogin(String username, String password) throws FileNotFoundException {
+	public boolean userLogin(String username, String password) throws FileNotFoundException {
 		
 		if (username.equals(userProgress.logIn(username, password))){
 			System.out.println("success");
 			status.setText("Success");
 			this.add(status);
+			return true;
 		} else {
 			System.out.println("failure");
 			status.setText("Failed Login!");
 			this.add(status);
+			return false;
 		}
 		
 
