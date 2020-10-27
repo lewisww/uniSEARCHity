@@ -72,6 +72,7 @@ public class LoginGUI extends JFrame {
 		cards2.setBackground(Color.WHITE);
 		im.setBackground(Color.WHITE);
 		JFrame frame = new JFrame();
+		frame.setSize(500,500);
 		frame.setTitle("uniSEARCHity");
 		frame.add(cards,BorderLayout.NORTH);
 		frame.add(im, BorderLayout.CENTER);
