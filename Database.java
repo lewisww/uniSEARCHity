@@ -22,6 +22,10 @@ public class Database {
 	public Database(String name) {
         this.name = name;
     }
+	public ArrayList <University> getUniversities(){
+		return universities;
+	}
+	
 	public static void main(String[] args) throws IOException {
 		File test = new File("/Users/hardersc/Desktop/Miami/CSE 201/src/test.csv");
 		int check = addUniversity(test);
