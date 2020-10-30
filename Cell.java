@@ -1,41 +1,18 @@
-/**
- * Implements an individual square in a game of connect 4.  Each
- * square is either empty, or is occupied by one of two players.
- * @author Norm Krumpe
- */
-
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.Border;
 
 public class Cell extends JPanel {
 
-	// Color constants
 	public static final Color BACK_COLOR = Color.GRAY;
 	public static final Color EMPTY_COLOR = Color.GRAY;
 	public static final Color PLAYER_1_COLOR = Color.RED;
 	public static final Color PLAYER_2_COLOR = Color.BLACK;
 
-	// The size of the boundary surrounding the circle. A value of
-	// 0 would mean the circle touches the square on all 4 sides
 	public static final int BOUNDARY = 5;
 
-	// The current occupant. 0 means empty, and 1 and 2 represent
-	// players 1 and 2 respectively
 	private int player;
 
-	/**
-	 * Constructs a new square with colors specified for players 1 and 2. The
-	 * square is initally empty.
-	 * 
-	 * @param playerColor1
-	 *            the color for player 1's piece
-	 * @param playerColor2
-	 *            the color for player 2's piece
-	 * @throws IllegalStateException
-	 *             if playerColor1 and playerColor2 are the same or if either of
-	 *             those colors matches BACK_COLOR or EMPTY_COLOR
-	 */
 	public Cell() {
 		super();
 		this.player = 0;
@@ -46,14 +23,6 @@ public class Cell extends JPanel {
 		setBorder(blackline);
 	}
 
-	/**
-	 * Sets the occupant to the specified value.
-	 * 
-	 * @param player
-	 *            the occupant of the square (0=empty, 1=player1, 2=player2)
-	 * @throws IllegalArgumentException
-	 *             if the occupant is not 0, 1, or 2
-	 */
 	public void setPlayer(int player) {
 		if (player < 0 || player > 2)
 			throw new IllegalArgumentException("Invalid occupant: " + player
@@ -63,22 +32,10 @@ public class Cell extends JPanel {
 		repaint();
 	}
 
-	/**
-	 * Gets the current occupant of this square
-	 * 
-	 * @return the current occupant of this square (0=empty, 1=player1,
-	 *         2=player2)
-	 */
 	public int getPlayer() {
 		return player;
 	}
 
-	/**
-	 * Draws the circle in the square
-	 * 
-	 * @param g
-	 *            the Graphics object that will do the painting
-	 */
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -99,3 +56,4 @@ public class Cell extends JPanel {
 	}
 
 }
+
