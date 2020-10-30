@@ -6,10 +6,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class AccountGUI extends JFrame {
+	
+	public static Database collegeList;
+	public static User currentUser;
 	
 	private final int FRAME_WIDTH = 700;
 	private final int FRAME_HEIGHT = 310;
@@ -32,22 +36,28 @@ public class AccountGUI extends JFrame {
 	JPanel im;
 	ImageIcon imag;
 
-	public static void main(String[] args) throws FileNotFoundException {
+	/*
+	 * Initializes the database and user upon successful login.
+	 */
+	public static void main(String[] args) throws IOException {
+		
+		collegeList = new Database("College List");
+		Database.addUniversity(new File("collegeList.csv"));
 		
 		File userFile = new File(args[0] + ".txt");
-		JFrame frame = new AccountGUI(userFile, args[0]);
+		currentUser = new User(userFile, args[0]);
+		JFrame frame = new AccountGUI(currentUser, userFile);
 		//frame.setTitle("uniSEARCHity");
 		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//frame.setVisible(true);
 	}
 	
-	public AccountGUI(File userFile, String user) throws FileNotFoundException {
-		Scanner scan = new Scanner(userFile);
-		createComponents(userFile, scan, user);
+	public AccountGUI(User u, File userFile) {
+		createComponents(u, userFile);
 		setSize(FRAME_WIDTH, FRAME_HEIGHT);
 	}
 	
-	public void createComponents(File userFile, Scanner accountDetails, String user) {
+	public void createComponents(User u, File userFile) {
 		cards = new JPanel();
 		
 		
@@ -61,35 +71,35 @@ public class AccountGUI extends JFrame {
 		label5 = new JLabel("Password: ");
 		
 		name = new JTextField(25);
-		name.setText(accountDetails.nextLine());
+		name.setText(u.getName());
 		name.setEditable(false);
 		
 		username = new JTextField(25);
-		username.setText(user);
+		username.setText(u.getUsername());
 		username.setEditable(false);
 		
 		email = new JTextField(25);
-		email.setText(accountDetails.nextLine());
+		email.setText(u.getEmail());
 		
 		age = new JTextField(25);
-		age.setText(accountDetails.nextLine());
+		age.setText(u.getAge());
 		
 		password = new JTextField(25);
-		password.setText(accountDetails.nextLine());
+		password.setText(u.getPassword());
 		//addPreferredSchool = new JTextField(25);
 		//removePreferredSchool = new JTextField(25);
 		save = new JButton("Save Changes");
 		save.addActionListener(e -> {
-			try {
-				PrintWriter writer = new PrintWriter(userFile);
-				writer.println(name.getText() + "\n" + email.getText() + "\n" +
-						age.getText() + "\n" + password.getText());
-				writer.close();
-			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-			}
+			u.setName(name.getText());
+			u.setEmail(email.getText());
+			u.setAge(age.getText());
+			u.setPassword(password.getText());
+			u.writeToFile();
 		});
 		display = new JButton("Display Schools");
+		display.addActionListener(e -> {
+			DatabaseWindow.main(null);
+		});
 		
 		cards.add(label1);
 		cards.add(name);

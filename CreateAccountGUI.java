@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 /**
  * This is a class that is the GUI to the Create Account page, and will be used to generate
  * an account file for the user
@@ -68,7 +69,7 @@ public class CreateAccountGUI extends JFrame{
 					if (createAccount(name.getText(),username.getText(), email.getText(), passwd.getText(),
 							confpasswd.getText(),Integer.parseInt(age.getText())))
 						AccountGUI.main(new String[] {username.getText()});
-				} catch (NumberFormatException | FileNotFoundException e1) {
+				} catch (NumberFormatException | IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}

@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class LoginGUI extends JFrame {
@@ -68,7 +69,7 @@ public class LoginGUI extends JFrame {
 			try {
 				if (userLogin(username.getText(),password.getText()))
 					AccountGUI.main(new String[] {username.getText()});
-			} catch (FileNotFoundException e1) {
+			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
@@ -89,7 +90,6 @@ public class LoginGUI extends JFrame {
 		cards2.setBackground(Color.WHITE);
 		im.setBackground(Color.WHITE);
 		JFrame frame = new JFrame();
-		frame.setSize(500,500);
 		frame.setTitle("uniSEARCHity");
 		frame.add(cards,BorderLayout.NORTH);
 		frame.add(im, BorderLayout.CENTER);
