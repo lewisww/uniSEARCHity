@@ -6,48 +6,47 @@ public class Cell extends JPanel {
 
 	public static final Color BACK_COLOR = Color.GRAY;
 	public static final Color EMPTY_COLOR = Color.GRAY;
-	public static final Color PLAYER_1_COLOR = Color.RED;
-	public static final Color PLAYER_2_COLOR = Color.BLACK;
 
 	public static final int BOUNDARY = 5;
 
-	private int player;
+	private String context;
 
 	public Cell() {
 		super();
-		this.player = 0;
+		this.context = "name";
 		setBackground(BACK_COLOR);
-
-		// A border around the square
 		Border blackline = BorderFactory.createLineBorder(Color.BLACK, 1);
 		setBorder(blackline);
 	}
 
-	public void setPlayer(int player) {
-		if (player < 0 || player > 2)
-			throw new IllegalArgumentException("Invalid occupant: " + player
-					+ ", must be 0, 1, or 2");
-		this.player = player;
-		setToolTipText("Player " + player);
+	public void setContext(String context) {
+		this.context = context;
+		setToolTipText(context);
 		repaint();
 	}
 
-	public int getPlayer() {
-		return player;
+	public String getContext() {
+		return context;
 	}
 
-	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		switch (player) {
-		case 0:
-			g.setColor(EMPTY_COLOR);
+		switch (context) {
+		case "name":
+			g.drawString("new University", 200, 200);
 			break;
-		case 1:
-			g.setColor(PLAYER_1_COLOR);
+		case "gpa":
+			g.drawString("new gpa", 200, 200);
 			break;
-		case 2:
-			g.setColor(PLAYER_2_COLOR);
+		case "number":
+			g.drawString("new number", 200, 200);
+			break;
+		case "admission rate":
+			g.drawString("new admission rate", 200, 200);
+			break;
+		case "majors":
+			g.drawString("new majors", 200, 200);
+			break;
 		}
 
 		g.fillOval(BOUNDARY, BOUNDARY, this.getWidth() - 2 * BOUNDARY,
@@ -56,4 +55,5 @@ public class Cell extends JPanel {
 	}
 
 }
+
 
