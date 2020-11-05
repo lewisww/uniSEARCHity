@@ -44,6 +44,16 @@ public class Database {
 //		account.createAccount(input);
 //
 //	}
+	
+	// New in iteration 2, this is for the User class to help load a wishlist.
+	public University getUniversity(String name) {
+		for (University u : universities) {
+			if (u.getName().equals(name)) {
+				return u;
+			}
+		}
+		return null;
+	}
 
 	/**
 	 * This method returns the University at a given index of an University array
@@ -90,7 +100,7 @@ public class Database {
 		while ((line = reader.readLine()) != null) {
 			ArrayList<String> majors = new ArrayList<String>();
 			String[] values = line.split(",");
-			if (values.length < 5)
+			if (values.length < 4)
 				return 1; // not enough data to create a university object
 			for (int i = 0; i < values.length; i++) {
 				switch (i) {

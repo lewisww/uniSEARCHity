@@ -13,6 +13,7 @@ import java.util.Scanner;
  */
 public class User {
 
+	private String username;
 	private String name;
 	private String email;
 	private String age;
@@ -23,7 +24,8 @@ public class User {
 	/*
 	 * In practice this should never throw a FileNotFound Exception.
 	 */
-	public User(File userFile) throws FileNotFoundException {
+	public User(File userFile, String user) throws FileNotFoundException {
+		username = user;
 		Scanner scan = new Scanner(userFile);
 		name = scan.nextLine();
 		email = scan.nextLine();
@@ -33,9 +35,15 @@ public class User {
 		while (scan.hasNextLine()) {
 			// Get university from database based on university name
 			// Add it to wishlist
+			University u = AccountGUI.collegeList.getUniversity(scan.nextLine());
+			if (u != null) {
+				wishlist.add(u);
+			}
 		}
 		scan.close();
 		accountInfo = userFile;
+		
+		System.out.println(wishlist.size());
 	}
 
 	/*
@@ -56,6 +64,30 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	/*
+	 * The get methods are used upon successful login to fill text fields
+	 * with relevant account info.
+	 */
+	public String getUsername() {
+		return username;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+	
+	public String getAge() {
+		return age;
+	}
+	
+	public String getPassword() {
+		return password;
 	}
 
 	/*
