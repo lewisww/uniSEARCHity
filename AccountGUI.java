@@ -98,11 +98,7 @@ public class AccountGUI extends JFrame {
 		});
 		display = new JButton("Display Schools");
 		display.addActionListener(e -> {
-			try {
-				DatabaseGUI.main(null);
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
+			new DatabaseGUI();
 		});
 		
 		cards.add(label1);
@@ -121,6 +117,7 @@ public class AccountGUI extends JFrame {
 		cards.setBackground(Color.WHITE);
 		
 		JFrame frame = new JFrame();
+		frame.setSize(500,400);
 		frame.setTitle("uniSEARCHity");
 		frame.add(cards,BorderLayout.NORTH);
 		

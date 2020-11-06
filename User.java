@@ -43,7 +43,7 @@ public class User {
 		scan.close();
 		accountInfo = userFile;
 		
-		System.out.println(wishlist.size());
+		// System.out.println(wishlist.size());
 	}
 
 	/*

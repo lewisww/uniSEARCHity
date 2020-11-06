@@ -7,16 +7,17 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 
-public class DatabaseGUI implements ActionListener {
+public class DatabaseGUI {
 	
-	public static void main(String[] args) throws IOException {
-		File test = new File("c:/Users/proph/Desktop/CSE201/test.csv");
-		int check = Database.addUniversity(test);
-		if (check == 1)
-			System.out.println("Not enough input");
-		new DatabaseGUI();
-	}
+//	public static void main(String[] args) throws IOException {
+//		File test = new File("c:/Users/proph/Desktop/CSE201/test.csv");
+//		int check = Database.addUniversity(test);
+//		if (check == 1)
+//			System.out.println("Not enough input");
+//		new DatabaseGUI();
+//	}
 	
 	public DatabaseGUI() {
 		JPanel panel = new JPanel();
@@ -64,9 +65,22 @@ public class DatabaseGUI implements ActionListener {
 			rateLabel.setBounds(610, 70 + i * 100, 180, 80);
 			panel.add(rateLabel);
 			
+			int currentIndex = i;
 			JButton moreInfor = new JButton("More Information");
 			moreInfor.setBounds(810, 70 + i * 100, 180, 80);
-			moreInfor.addActionListener(this);
+			moreInfor.addActionListener(e -> {
+				JPanel sPanel = new JPanel();
+				JFrame sFrame = new JFrame();
+				sFrame.setSize(600, 400);
+				sFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+				sFrame.add(sPanel);
+				
+				JLabel major = new JLabel(Database.universities.get(currentIndex).getMajors() + "");
+				major.setBounds(10, 100, 180, 80);
+				sPanel.add(major);
+				
+				sFrame.setVisible(true);
+			});
 			panel.add(moreInfor);
 			
 		}
@@ -74,19 +88,19 @@ public class DatabaseGUI implements ActionListener {
 		frame.setVisible(true);
 	}
 
-	public void actionPerformed(ActionEvent e) {
-		JPanel sPanel = new JPanel();
-		JFrame sFrame = new JFrame();
-		sFrame.setSize(600, 400);
-		sFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		sFrame.add(sPanel);
-		
-		JLabel major = new JLabel(Database.universities.get(0).getMajors() + "");
-		major.setBounds(10, 100, 180, 80);
-		sPanel.add(major);
-		
-		sFrame.setVisible(true);
-		
-	}
+//	public void actionPerformed(ActionEvent e) {
+//		JPanel sPanel = new JPanel();
+//		JFrame sFrame = new JFrame();
+//		sFrame.setSize(600, 400);
+//		sFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+//		sFrame.add(sPanel);
+//		
+//		JLabel major = new JLabel(Database.universities.get(0).getMajors() + "");
+//		major.setBounds(10, 100, 180, 80);
+//		sPanel.add(major);
+//		
+//		sFrame.setVisible(true);
+//		
+//	}
 	
 }
