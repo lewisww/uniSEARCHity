@@ -132,15 +132,17 @@ public class LoginGUI extends JFrame implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		File test = new File("collegeList.csv");
-		int check = 0;
-		try {
-			check = Database.addUniversity(test);
-		} catch (IOException e1) {
-			e1.printStackTrace();
+		if(Database.universities.size() == 0) {
+			File test = new File("collegeList.csv");
+			int check = 0;
+			try {
+				check = Database.addUniversity(test);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			if (check == 1)
+				System.out.println("Not enough input");
 		}
-		if (check == 1)
-			System.out.println("Not enough input");
 		new DatabaseGUI();
 	}
 }

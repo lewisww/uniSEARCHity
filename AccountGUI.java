@@ -42,7 +42,8 @@ public class AccountGUI extends JFrame {
 	public static void main(String[] args) throws IOException {
 		
 		collegeList = new Database("College List");
-		Database.addUniversity(new File("collegeList.csv"));
+		if(Database.universities.size() == 0)
+			Database.addUniversity(new File("collegeList.csv"));
 		
 		File userFile = new File(args[0] + ".txt");
 		currentUser = new User(userFile, args[0]);
