@@ -18,17 +18,25 @@ public class universitySort {
 
 	}
 	public static Database sortName(Database list, String term) {
-		
+
 		for(int i = 0; i < list.getUniversities().size(); i++) {
 			for(int j = 0; j < list.getUniversities().size() - i - 1; j++) {
-				//System.out.println(list.getUniversity(j).getName()+ " " + list.getUniversity(j).getName().toUpperCase().compareTo(term));
+				//System.out.println(list.getUniversity(j).getName()+ " " + list.getUniversity(j+1).getName()+ " " + list.getUniversity(j).getName().toUpperCase().compareTo(list.getUniversity(j+1).getName().toUpperCase()));
 				//System.out.println(list.getUniversity(j+1).getName()+ " " + list.getUniversity(j+1).getName().toUpperCase().compareTo(term));
-				
-				if(Math.abs(list.getUniversity(j).getName().toUpperCase().compareTo(term)) > Math.abs(list.getUniversity(j+1).getName().toUpperCase().compareTo(term))) {
-					University temp = list.getUniversity(j);
-					list.getUniversities().set(j, list.getUniversity(j+1));
-					list.getUniversities().set(j+1, temp);
+				if(term.toUpperCase().equals("L")) {
+					if (list.getUniversity(j).getName().toUpperCase().charAt(0) < list.getUniversity(j+1).getName().toUpperCase().charAt(0)) {
+						University temp = list.getUniversity(j);
+						list.getUniversities().set(j, list.getUniversity(j+1));
+						list.getUniversities().set(j+1, temp);
+					}
+				} else {
+					if(list.getUniversity(j).getName().toUpperCase().charAt(0) > list.getUniversity(j+1).getName().toUpperCase().charAt(0)) {
+						University temp = list.getUniversity(j);
+						list.getUniversities().set(j, list.getUniversity(j+1));
+						list.getUniversities().set(j+1, temp);
+					}
 				}
+				
 			}
 		}
 		return list;
@@ -37,7 +45,7 @@ public class universitySort {
 
 		for(int i = 0; i < list.getUniversities().size() - 1; i++) {
 			for(int j = 0; j < list.getUniversities().size() - i - 1 ; j++) {
-				if(term.equals("L")) {  //sort by lowest average GPA
+				if(term.toUpperCase().equals("L")) {  //sort by lowest average GPA
 					if(list.getUniversity(j).getAverageGPA() > list.getUniversity(j+1).getAverageGPA()) {
 						University temp = list.getUniversity(j);
 						list.getUniversities().set(j, list.getUniversity(j+1));
@@ -57,7 +65,7 @@ public class universitySort {
 	public static Database sortNum(Database list, String term) {
 		for(int i = 0; i < list.getUniversities().size() - 1; i++) {
 			for(int j = 0; j < list.getUniversities().size() - i - 1 ; j++) {
-				if(term.equals("L")) { //sort by lowest number students
+				if(term.toUpperCase().equals("L")) { //sort by lowest number students
 					if(list.getUniversity(j).getNumStudents() > list.getUniversity(j+1).getNumStudents()) {
 						University temp = list.getUniversity(j);
 						list.getUniversities().set(j, list.getUniversity(j+1));
@@ -77,7 +85,7 @@ public class universitySort {
 	public static Database sortRate(Database list, String term) {
 		for(int i = 0; i < list.getUniversities().size() - 1; i++) {
 			for(int j = 0; j < list.getUniversities().size() - i - 1 ; j++) {
-				if(term.equals("L")) { //sort by lowest admission rate
+				if(term.toUpperCase().equals("L")) { //sort by lowest admission rate
 					if(list.getUniversity(j).getAdmissionRate() > list.getUniversity(j+1).getAdmissionRate()) {
 						University temp = list.getUniversity(j);
 						list.getUniversities().set(j, list.getUniversity(j+1));
@@ -95,7 +103,7 @@ public class universitySort {
 		return list;
 	}
 	public static Database sortMajor(Database list, String term) {
-		
+
 		for(int i = 0; i < list.getUniversities().size(); i++) {
 			for(int j = 0; j < list.getUniversities().size() - i - 1; j++) {
 				if(Math.abs(closestMajor(list.getUniversity(j), term)) > Math.abs(closestMajor(list.getUniversity(j+1), term))) {
@@ -115,7 +123,7 @@ public class universitySort {
 			}
 		}
 		//System.out.println(closest + " " + closest.compareTo(term));
-		
+
 		return closest.compareTo(term);
 	}
 
