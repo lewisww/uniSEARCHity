@@ -27,7 +27,10 @@ public class SuggestGUI extends JFrame {
 	//JTextField addPreferredSchool;
 	//JTextField removePreferredSchool;
 	JButton search;
+	//JButton back;
+	//JToolBar cardb;
 	JPanel cards;
+	JPanel card2;
 	JPanel im;
 	ImageIcon imag;
 	
@@ -50,10 +53,13 @@ public class SuggestGUI extends JFrame {
 	}
 	
 	public void createComponents() {
+		//cardb = new JToolBar();
 		cards = new JPanel();
-		
-		
-		cards.setLayout(new GridLayout(7,0));
+		card2 = new JPanel();
+//		cardb.setLayout(new BorderLayout());
+//		cardb.setPreferredSize(new Dimension(500,50));
+//		cardb.setMaximumSize(new Dimension(10000, 50));
+		cards.setLayout(new GridLayout(0, 2, 0, 10));
 		cards.setPreferredSize(new Dimension(500, 200));
         cards.setMaximumSize(new Dimension(10000, 200));
 		label1 = new JLabel("GPA: ");
@@ -71,21 +77,28 @@ public class SuggestGUI extends JFrame {
 		search = new JButton("Suggest Schools");
 		search.addActionListener(e -> {
 		});
+//		back = new JButton("Back");
+//		back.addActionListener(e -> {
+//		});
 		
+		//cardb.add(back);
 		cards.add(label1);
 		cards.add(gpa);
 		cards.add(label2);
 		cards.add(major);
 		cards.add(label3);
 		cards.add(size);
-		cards.add(search);
+		card2.add(search);
 		
+		//cardb.setBackground(Color.WHITE);
 		cards.setBackground(Color.WHITE);
-		
+		card2.setBackground(Color.WHITE);
 		JFrame frame = new JFrame();
 		frame.setSize(500,400);
 		frame.setTitle("uniSEARCHity");
+		//frame.add(cardb, BorderLayout.NORTH);
 		frame.add(cards,BorderLayout.NORTH);
+		frame.add(card2, BorderLayout.CENTER);
 		//frame.add(fileUp, BorderLayout.NORTH);
 		
 		

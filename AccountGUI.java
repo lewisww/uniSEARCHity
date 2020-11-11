@@ -66,9 +66,9 @@ public class AccountGUI extends JFrame {
 		cards = new JPanel();
 		
 		
-		cards.setLayout(new GridLayout(7,0));
+		cards.setLayout(new GridLayout(0, 2, 0, 10));
 		cards.setPreferredSize(new Dimension(500, 200));
-        cards.setMaximumSize(new Dimension(1000, 200));
+        cards.setMaximumSize(new Dimension(1000, 500));
 		label1 = new JLabel("Name: ");
 		label2 = new JLabel("Username: ");
 		label3 = new JLabel("Email: ");
@@ -151,7 +151,6 @@ public class AccountGUI extends JFrame {
 		frame.setSize(500,400);
 		frame.setTitle("uniSEARCHity");
 		frame.add(cards,BorderLayout.NORTH);
-		//frame.add(fileUp, BorderLayout.NORTH);
 		
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
