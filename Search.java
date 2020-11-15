@@ -51,5 +51,53 @@ public class Search {
 	    br.close();
 	}
 
+	public static ArrayList<University> searchName(ArrayList<University> list, String name) {
+		ArrayList<University> result = new ArrayList<>();
+		for (University u : list) {
+			if (u.getName().equals(name)) {
+				result.add(u);
+			}
+		}
+		return result;
+	}
 
+	public static ArrayList<University> searchGPA(ArrayList<University> list, double min, double max) {
+		ArrayList<University> result = new ArrayList<>();
+		for (University u : list) {
+			if (u.getAverageGPA() >= min && u.getAverageGPA() <= max) {
+				result.add(u);
+			}
+		}
+		return result;
+	}
+	
+	public static ArrayList<University> searchNum(ArrayList<University> list, int min, int max) {
+		ArrayList<University> result = new ArrayList<>();
+		for (University u : list) {
+			if (u.getNumStudents() >= min && u.getNumStudents() <= max) {
+				result.add(u);
+			}
+		}
+		return result;
+	}
+	
+	public static ArrayList<University> searchRate(ArrayList<University> list, double min, double max) {
+		ArrayList<University> result = new ArrayList<>();
+		for (University u : list) {
+			if (u.getAdmissionRate() >= min && u.getAdmissionRate() <= max) {
+				result.add(u);
+			}
+		}
+		return result;
+	}
+	
+	public static ArrayList<University> searchMajor(ArrayList<University> list, String major) {
+		ArrayList<University> result = new ArrayList<>();
+		for (University u : list) {
+			if (u.getMajors().contains(major)) {
+				result.add(u);
+			}
+		}
+		return result;
+	}
 }
