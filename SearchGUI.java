@@ -17,6 +17,7 @@ public class SearchGUI {
 
 	JFrame frame;
 	ArrayList<University> list;
+	DatabaseGUI db;
 	
 	JPanel top;
 	JButton nameButton;
@@ -32,15 +33,15 @@ public class SearchGUI {
 	JTextField field2;
 	JButton search;
 	
-	// main is only for testing
-	public static void main(String[] args) throws IOException {
-		File test = new File("collegeList.csv");
-		Database.addUniversity(test);
-		new SearchGUI(Database.universities);
-	}
+//	public static void main(String[] args) throws IOException {
+//		File test = new File("collegeList.csv");
+//		Database.addUniversity(test);
+//		new SearchGUI(Database.universities);
+//	}
 	
-	public SearchGUI(ArrayList<University> list) {
+	public SearchGUI(ArrayList<University> list, DatabaseGUI database) {
 		this.list = list;
+		this.db = database;
 		createComponents();
 	}
 	
@@ -100,7 +101,7 @@ public class SearchGUI {
 			if (result.isEmpty()) {
 				field1.setText("No Schools Found");
 			} else {
-				new DatabaseGUI(result);
+				db.createComponents(result);
 			}
 		});
 		
@@ -127,7 +128,7 @@ public class SearchGUI {
 					field1.setText("No Schools Found");
 					field2.setText("No Schools Found");
 				} else {
-					new DatabaseGUI(result);
+					db.createComponents(result);
 				}
 			} catch (Exception e1) {
 				field1.setText("Must be a number");
@@ -160,7 +161,7 @@ public class SearchGUI {
 					field1.setText("No Schools Found");
 					field2.setText("No Schools Found");
 				} else {
-					new DatabaseGUI(result);
+					db.createComponents(result);
 				}
 			} catch (Exception e1) {
 				field1.setText("Must be an integer");
@@ -193,7 +194,7 @@ public class SearchGUI {
 					field1.setText("No Schools Found");
 					field2.setText("No Schools Found");
 				} else {
-					new DatabaseGUI(result);
+					db.createComponents(result);
 				}
 			} catch (Exception e1) {
 				field1.setText("Must be a number");
@@ -222,7 +223,7 @@ public class SearchGUI {
 			if (result.isEmpty()) {
 				field1.setText("No Schools Found");
 			} else {
-				new DatabaseGUI(result);
+				db.createComponents(result);
 			}
 		});
 		
